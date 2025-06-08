@@ -1,6 +1,6 @@
 import { type CardProps } from "@/interfaces";
 
-const Card = ({ title, content }: CardProps) => {
+const Card: React.FC<CardProps> = ({ title, content }: CardProps) => {
     return (
         <div className="bg-white shadow-md rounded-lg p-6">
             <h2 className="text-xl font-semibold mb-4">{title}</h2>
