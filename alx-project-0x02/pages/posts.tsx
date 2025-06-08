@@ -1,17 +1,45 @@
-import Header from "@/components/layout/Header"
-import Head from "next/head"
+import React, { useEffect, useState } from "react";
 import PostCard from "@/components/common/PostCard";
+import { PostProps } from "@/interfaces";
 
-export default function Posts() {
+const PostsPage = () => {
+    const [posts, setPosts] = useState<PostProps[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        fetch("https://jsonplaceholder.typicode.com/posts")
+            .then((res) => res.json())
+            .then((data) => {
+                const mappedPosts = data.map((post: any) => ({
+                    userId: post.userId,
+                    id: post.id,
+                    title: post.title,
+                    content: post.body,
+                }));
+                setPosts(mappedPosts);
+                setLoading(false);
+            });
+    }, []);
+
     return (
-        <>
-            <Header />
-            <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-                <h1 className="text-4xl font-bold mb-4">Posts</h1>
-                <p className="text-lg text-gray-700">This is the posts page of our Next.js application.</p>
-            </div>
-            <PostCard title="Post 1" content="This is the content of post 1." userId={1} />
-            <PostCard title="Post 2" content="This is the content of post 2." userId={2} />
-        </>
+        <div className="p-6 max-w-4xl mx-auto">
+            <h1 className="text-2xl font-bold mb-4">Posts</h1>
+            {loading ? (
+                <p>Loading...</p>
+            ) : (
+                <div className="space-y-4">
+                    {posts.map((post) => (
+                        <PostCard
+                            key={post.id}
+                            title={post.title}
+                            content={post.content}
+                            userId={post.userId}
+                        />
+                    ))}
+                </div>
+            )}
+        </div>
     );
-}
+};
+
+export default PostsPage;
