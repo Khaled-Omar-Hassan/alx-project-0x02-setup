@@ -1,8 +1,6 @@
 import React, { useState } from "react";
+import { type PostModalProps } from "@/interfaces";
 
-interface PostModalProps {
-    onSubmit: (post: { title: string; content: string }) => void;
-}
 
 const PostModal: React.FC<PostModalProps> = ({ onSubmit }) => {
     const [open, setOpen] = useState(false);
