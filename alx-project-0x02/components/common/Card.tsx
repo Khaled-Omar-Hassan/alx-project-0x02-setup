@@ -1,6 +1,6 @@
-import { CardProps } from "@/interfaces";
+import { type CardProps } from "@/interfaces";
 
-export const Card = ({ title, content }: CardProps) => {
+const Card = ({ title, content }: CardProps) => {
     return (
         <div className="bg-white shadow-md rounded-lg p-6">
             <h2 className="text-xl font-semibold mb-4">{title}</h2>
@@ -8,3 +8,5 @@ export const Card = ({ title, content }: CardProps) => {
         </div>
     );
 };
+
+export default Card;
