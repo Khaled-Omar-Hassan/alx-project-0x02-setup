@@ -1,1 +1,1 @@
-this is an alx next.js test project
+Next.js Project Setup and Basics
